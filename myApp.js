@@ -55,8 +55,6 @@ var personSchema = new Schema({
   favoriteFoods: [String]
 });
 
-
-
 var Person = mongoose.model('Person', personSchema);
 
 // **Note**: Glitch is a real server, and in real servers interactions with
