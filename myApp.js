@@ -2,47 +2,14 @@
 * 3. FCC Mongo & Mongoose Challenges
 * ==================================
 ***********************************************/
-
 /** # MONGOOSE SETUP #
-/*  ================== */
-
 /** 1) Install & Set up mongoose */
-
 const mongoose = require('mongoose');
 
-
-// Add mongodb and mongoose to the project's package.json. Then require 
-// mongoose. Store your Mongo Atlas database URI in the private .env file 
-// as MONGO_URI. Connect to the database using the following syntax:
-//
-// mongoose.connect(<Your URI>, { useNewUrlParser: true, useUnifiedTopology: true }); 
 mongoose.connect('mongodb+srv://admin:.dlfkjsdflkweetr3@cluster0.4urka.mongodb.net/mongonpm?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }); 
 
-
-
 /** # SCHEMAS and MODELS #
-/*  ====================== */
-
 /** 2) Create a 'Person' Model */
-
-// First of all we need a **Schema**. Each schema maps to a MongoDB collection
-// and defines the shape of the documents within that collection. Schemas are
-// building block for Models. They can be nested to create complex models,
-// but in this case we'll keep things simple. A model allows you to create
-// instances of your objects, called **documents**.
-
-// Create a person having this prototype :
-
-// - Person Prototype -
-// --------------------
-// name : string [required]
-// age :  number
-// favoriteFoods : array of strings (*)
-
-// Use the mongoose basic *schema types*. If you want you can also add more
-// fields, use simple validators like `required` or `unique`, and set
-// `default` values. See the [mongoose docs](http://mongoosejs.com/docs/guide.html).
-
 // <Your code here >
 var Schema = mongoose.Schema;
 
@@ -57,41 +24,8 @@ var personSchema = new Schema({
 
 var Person = mongoose.model('Person', personSchema);
 
-// **Note**: Glitch is a real server, and in real servers interactions with
-// the db are placed in handler functions, to be called when some event happens
-// (e.g. someone hits an endpoint on your API). We'll follow the same approach
-// in these exercises. The `done()` function is a callback that tells us that
-// we can proceed after completing an asynchronous operation such as inserting,
-// searching, updating or deleting. It's following the Node convention and
-// should be called as `done(null, data)` on success, or `done(err)` on error.
-// **Warning** - When interacting with remote services, **errors may occur** !
-
-// - Example -
-// var someFunc = function(done) {
-//   ... do something (risky) ...
-//   if(error) return done(error);
-//   done(null, result);
-// };
-
 /** # [C]RUD part I - CREATE #
-/*  ========================== */
-
 /** 3) Create and Save a Person */
-
-// Create a `document` instance using the `Person` constructor you build before.
-// Pass to the constructor an object having the fields `name`, `age`,
-// and `favoriteFoods`. Their types must be conformant to the ones in
-// the Person `Schema`. Then call the method `document.save()` on the returned
-// document instance, passing to it a callback using the Node convention.
-// This is a common pattern, all the **CRUD** methods take a callback 
-// function like this as the last argument.
-
-// - Example -
-// ...
-// person.save(function(err, data) {
-//    ...do your stuff here...
-// });
-
 var createAndSavePerson = function(done) {
   const person = new Person({
 		name: "Max",
@@ -118,9 +52,15 @@ var createAndSavePerson = function(done) {
 
 var createManyPeople = function(arrayOfPeople, done) {
     
-    done(null/*, data*/);
-    
+    Person.create(arrayOfPeople, (err, people)=>{
+      if(err){
+        done(err);
+      }	
+      done(null, people);
+    })
 };
+
+
 
 /** # C[R]UD part II - READ #
 /*  ========================= */
