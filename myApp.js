@@ -26,7 +26,7 @@ var Person = mongoose.model('Person', personSchema);
 
 /** # [C]RUD part I - CREATE #
 /** 3) Create and Save a Person */
-var createAndSavePerson = function(done) {
+var createAndSavePerson = (done) => {
   const person = new Person({
 		name: "Max",
 		age: 30,
@@ -42,15 +42,7 @@ var createAndSavePerson = function(done) {
   };
 
 /** 4) Create many People with `Model.create()` */
-
-// Sometimes you need to create many Instances of your Models,
-// e.g. when seeding a database with initial data. `Model.create()`
-// takes an array of objects like [{name: 'John', ...}, {...}, ...],
-// as the 1st argument, and saves them all in the db.
-// Create many people using `Model.create()`, using the function argument
-// 'arrayOfPeople'.
-
-var createManyPeople = function(arrayOfPeople, done) {
+var createManyPeople = (arrayOfPeople, done) => {
     
     Person.create(arrayOfPeople, (err, people)=>{
       if(err){
@@ -59,8 +51,6 @@ var createManyPeople = function(arrayOfPeople, done) {
       done(null, people);
     })
 };
-
-
 
 /** # C[R]UD part II - READ #
 /*  ========================= */
