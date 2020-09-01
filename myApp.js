@@ -116,9 +116,6 @@ var findAndUpdate = function(personName, done) {
 
 /** # CRU[D] part IV - DELETE #
 /** 10) Delete one Person */
-
-
-
 var removeById = function(personId, done) {
   Person.findByIdAndRemove(personId, (err, person)=>{
     if(err){
@@ -132,8 +129,12 @@ var removeById = function(personId, done) {
 
 var removeManyPeople = function(done) {
   var nameToRemove = "Mary";
-
-  done(null/*, data*/);
+  Person.remove(nameToRemove, (err, person)=>{
+    if(err){
+      done(err);
+    }	
+    done(null, person);
+  })
 };
 
 /** # C[R]UD part V -  More about Queries # 
