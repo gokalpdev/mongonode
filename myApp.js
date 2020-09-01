@@ -53,19 +53,14 @@ var createManyPeople = (arrayOfPeople, done) => {
 };
 
 /** # C[R]UD part II - READ #
-/*  ========================= */
-
 /** 5) Use `Model.find()` */
-
-// Find all the people having a given name, using `Model.find() -> [Person]`
-// In its simplest usage, `Model.find()` accepts a **query** document (a JSON
-// object ) as the first argument, and returns an **array** of matches.
-// It supports an extremely wide range of search options. Check it in the docs.
-// Use the function argument `personName` as search key.
-
 var findPeopleByName = function(personName, done) {
-  
-  done(null/*, data*/);
+  Person.find({name: personName}, (error, peopleFound)=>{
+    if(error){
+      done(error);
+    }	
+    done(null, peopleFound);
+  })
 
 };
 
