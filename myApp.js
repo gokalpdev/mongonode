@@ -74,8 +74,12 @@ var findPeopleByName = function(personName, done) {
 // argument `food` as search key
 
 var findOneByFood = function(food, done) {
-
-  done(null/*, data*/);
+  Person.findOne({favoriteFoods: food}, (error, Person)=>{
+    if(error){
+      done(error);
+    }	
+    done(null, Person);
+  })
   
 };
 
