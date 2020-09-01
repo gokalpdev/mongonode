@@ -105,34 +105,20 @@ var findEditThenSave = (personId, done) => {
 };
 /** 9) New Update : Use `findOneAndUpdate()` */
 
-// Recent versions of `mongoose` have methods to simplify documents updating.
-// Some more advanced features (i.e. pre/post hooks, validation) beahve
-// differently with this approach, so the 'Classic' method is still useful in
-// many situations. `findByIdAndUpdate()` can be used when searching by Id.
-//
-// Find a person by `name` and set her age to `20`. Use the function parameter
-// `personName` as search key.
-//
-// Hint: We want you to return the **updated** document. In order to do that
-// you need to pass the options document `{ new: true }` as the 3rd argument
-// to `findOneAndUpdate()`. By default the method
-// passes the unmodified object to its callback.
-
 var findAndUpdate = function(personName, done) {
   var ageToSet = 20;
-
-  done(null/*, data*/);
+  Person.findOneAndUpdate({name: personName}, ageToSet, { new: true }, (err, person)=>{
+      if(err){
+        done(err);
+      }	
+      done(null, data);
+  })
 };
 
 /** # CRU[D] part IV - DELETE #
-/*  =========================== */
-
 /** 10) Delete one Person */
 
-// Delete one person by her `_id`. You should use one of the methods
-// `findByIdAndRemove()` or `findOneAndRemove()`. They are similar to the
-// previous update methods. They pass the removed document to the cb.
-// As usual, use the function argument `personId` as search key.
+
 
 var removeById = function(personId, done) {
   
@@ -142,14 +128,6 @@ var removeById = function(personId, done) {
 
 /** 11) Delete many People */
 
-// `Model.remove()` is useful to delete all the documents matching given criteria.
-// Delete all the people whose name is "Mary", using `Model.remove()`.
-// Pass to it a query ducument with the "name" field set, and of course a callback.
-//
-// Note: `Model.remove()` doesn't return the removed document, but a document
-// containing the outcome of the operation, and the number of items affected.
-// Don't forget to pass it to the `done()` callback, since we use it in tests.
-
 var removeManyPeople = function(done) {
   var nameToRemove = "Mary";
 
@@ -157,23 +135,7 @@ var removeManyPeople = function(done) {
 };
 
 /** # C[R]UD part V -  More about Queries # 
-/*  ======================================= */
-
 /** 12) Chain Query helpers */
-
-// If you don't pass the `callback` as the last argument to `Model.find()`
-// (or to the other similar search methods introduced before), the query is
-// not executed, and can even be stored in a variable for later use.
-// This kind of object enables you to build up a query using chaining syntax.
-// The actual db search is executed when you finally chain
-// the method `.exec()`, passing your callback to it.
-// There are many query helpers, here we'll use the most 'famous' ones.
-
-// Find people who like "burrito". Sort them alphabetically by name,
-// Limit the results to two documents, and hide their age.
-// Chain `.find()`, `.sort()`, `.limit()`, `.select()`, and then `.exec()`,
-// passing the `done(err, data)` callback to it.
-
 var queryChain = function(done) {
   var foodToSearch = "burrito";
   
