@@ -79,7 +79,7 @@ var findOneByFood = function(food, done) {
 
 var findPersonById = (personId, done) => {
   
-  Person.findById(personId, (err, Person)=>{
+ let personToEdit = Person.findById(personId, (err, Person)=>{
     if(err){
       done(err);
     }	
@@ -92,9 +92,17 @@ var findPersonById = (personId, done) => {
 
 var findEditThenSave = function(personId, done) {
   var foodToAdd = 'hamburger';
+  Person.findById(personId, (err, Person)=>{
+    if(err){ done(err); }
+    person.favoriteFoods.push(foodToAdd)
+    person.save((err, data) => {
+      if(err){
+        done(err);
+      }	
+      done(null, data);
+      })
   
-  done(null/*, data*/);
-};
+});
 
 /** 9) New Update : Use `findOneAndUpdate()` */
 
