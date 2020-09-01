@@ -111,7 +111,7 @@ var findAndUpdate = function(personName, done) {
       if(err){
         done(err);
       }	
-      done(null, data);
+      done(null, person);
   })
 };
 
