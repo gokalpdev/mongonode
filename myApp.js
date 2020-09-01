@@ -86,7 +86,7 @@ var findOneByFood = function(food, done) {
 
 var findPersonById = function(personId, done) {
   
-  Person.findById({personId: personId}, (err, Person)=>{
+  Person.findById({id: personId}, (err, Person)=>{
     if(err){
       done(err);
     }	
