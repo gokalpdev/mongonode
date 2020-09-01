@@ -92,7 +92,7 @@ var findPersonById = (personId, done) => {
 
 var findEditThenSave = function(personId, done) {
   var foodToAdd = 'hamburger';
-  Person.findById(personId, (err, Person)=>{
+  Person.findById(personId, (err, person)=>{
     if(err){ done(err); }
     person.favoriteFoods.push(foodToAdd)
     person.save((err, data) => {
