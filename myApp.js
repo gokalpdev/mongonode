@@ -128,8 +128,7 @@ var removeById = function(personId, done) {
 /** 11) Delete many People */
 
 var removeManyPeople = function(done) {
-  var nameToRemove = "Mary";
-  Person.remove(nameToRemove, (err, person)=>{
+  Person.remove( {name: "Mary"}, (err, person)=>{
     if(err){
       done(err);
     }	
