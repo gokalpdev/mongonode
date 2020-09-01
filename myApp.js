@@ -90,7 +90,7 @@ var findPersonById = (personId, done) => {
 /** # CR[U]D part III - UPDATE # 
 /** 8) Classic Update : Find, Edit then Save */
 
-var findEditThenSave = function(personId, done) {
+var findEditThenSave = (personId, done) => {
   var foodToAdd = 'hamburger';
   Person.findById(personId, (err, person)=>{
     if(err){ done(err); }
@@ -101,9 +101,8 @@ var findEditThenSave = function(personId, done) {
       }	
       done(null, data);
       })
-  
-});
-
+  });
+};
 /** 9) New Update : Use `findOneAndUpdate()` */
 
 // Recent versions of `mongoose` have methods to simplify documents updating.
