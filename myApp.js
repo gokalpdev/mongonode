@@ -120,9 +120,12 @@ var findAndUpdate = function(personName, done) {
 
 
 var removeById = function(personId, done) {
-  
-  done(null/*, data*/);
-    
+  Person.findByIdAndRemove(personId, (err, person)=>{
+    if(err){
+      done(err);
+    }	
+    done(null, person);
+  })
 };
 
 /** 11) Delete many People */
