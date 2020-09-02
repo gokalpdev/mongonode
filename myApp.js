@@ -79,11 +79,11 @@ var findOneByFood = function(food, done) {
 
 var findPersonById = (personId, done) => {
   
- let personToEdit = Person.findById(personId, (err, Person)=>{
+ Person.findById(personId, (err, person)=>{
     if(err){
       done(err);
     }	
-    done(null, Person);
+    done(null, person);
   })  
 };
 
@@ -140,8 +140,8 @@ var removeManyPeople = function(done) {
 /** 12) Chain Query helpers */
 var queryChain = function(done) {
   var foodToSearch = "burrito";
+
   
-  done(null/*, data*/);
 };
 
 /** **Well Done !!**
