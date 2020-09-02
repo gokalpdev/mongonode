@@ -140,8 +140,12 @@ var removeManyPeople = function(done) {
 /** 12) Chain Query helpers */
 var queryChain = function(done) {
   var foodToSearch = "burrito";
-
-  
+  Person.find({favoriteFoods: foodToSearch}).sort(name).limit(2).select('-age').exec((err, person)=>{
+    if(err){
+      done(err);
+    }	
+    done(null, person);
+  })
 };
 
 /** **Well Done !!**
